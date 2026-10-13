@@ -36,8 +36,10 @@ jobs:
       - uses: actions/setup-java@v4
         if: env.FOUND == 'true'
         with: { distribution: temurin, java-version: 17 }
-      - uses: android-actions/setup-android@v3
+      # SDK مثبّت مسبقًا على ubuntu-24.04؛ نقبل التراخيص فقط (setup-android يفشل بسبب حزمة 'tools')
+      - name: Accept Android SDK licenses
         if: env.FOUND == 'true'
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
       - uses: gradle/actions/setup-gradle@v4
         if: env.FOUND == 'true'
         with: { gradle-version: '8.7' }
