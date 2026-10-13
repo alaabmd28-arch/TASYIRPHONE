@@ -1,9 +1,11 @@
-# ضعه في: TasyirBMD/.github/workflows/android-build.yml
+# .github/workflows/android-build.yml
+# يجد مشروع أندرويد تلقائيًا (settings.gradle[.kts] بجانب مجلد app/).
+# إن لم يوجد في هذا المستودع تُتخطى الخطوات بتحذير ولا يفشل التشغيل.
 name: Android build
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
     tags: ['v*']
   pull_request:
   workflow_dispatch:
@@ -13,22 +15,44 @@ permissions:
 
 jobs:
   apk:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - name: Locate project
+        run: |
+          PROJ=""
+          for f in $(find . \( -name settings.gradle.kts -o -name settings.gradle \) -not -path './.git/*'); do
+            d=$(dirname "$f")
+            if [ -d "$d/app" ]; then PROJ="$d"; break; fi
+          done
+          if [ -z "$PROJ" ]; then
+            echo "::warning::Android project (settings.gradle + app/) not found in this repo - skipping."
+            echo "FOUND=false" >> "$GITHUB_ENV"
+          else
+            echo "FOUND=true" >> "$GITHUB_ENV"
+            echo "PROJ=$PROJ" >> "$GITHUB_ENV"
+            echo "Project: $PROJ"
+          fi
       - uses: actions/setup-java@v4
+        if: env.FOUND == 'true'
         with: { distribution: temurin, java-version: 17 }
       - uses: android-actions/setup-android@v3
+        if: env.FOUND == 'true'
       - uses: gradle/actions/setup-gradle@v4
+        if: env.FOUND == 'true'
         with: { gradle-version: '8.7' }
 
-      - name: Debug APK (always)
+      - name: Debug APK
+        if: env.FOUND == 'true'
+        working-directory: ${{ env.PROJ }}
         run: gradle :app:assembleDebug --no-daemon
 
-      # أسرار المستودع: KEYSTORE_B64 (ملف tasyirbmd.jks بصيغة base64) و TASYIR_STORE_PASSWORD
-      # (و TASYIR_KEY_PASSWORD اختياري). نفس المفتاح => التحديث يُثبَّت فوق النسخة الحالية.
+      # أسرار اختيارية: KEYSTORE_B64 (ملف tasyirbmd.jks بصيغة base64) و TASYIR_STORE_PASSWORD
+      # (و TASYIR_KEY_PASSWORD). نفس المفتاح => التحديث يُثبَّت فوق النسخة الحالية.
       - name: Restore keystore
         id: ks
+        if: env.FOUND == 'true'
+        working-directory: ${{ env.PROJ }}
         env: { KEYSTORE_B64: "${{ secrets.KEYSTORE_B64 }}" }
         run: |
           if [ -n "$KEYSTORE_B64" ]; then
@@ -36,19 +60,21 @@ jobs:
             echo "ready=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Release APK (signed)
-        if: steps.ks.outputs.ready == 'true'
+        if: env.FOUND == 'true' && steps.ks.outputs.ready == 'true'
+        working-directory: ${{ env.PROJ }}
         env:
           TASYIR_STORE_PASSWORD: ${{ secrets.TASYIR_STORE_PASSWORD }}
           TASYIR_KEY_PASSWORD: ${{ secrets.TASYIR_KEY_PASSWORD }}
         run: gradle :app:assembleRelease --no-daemon
 
       - uses: actions/upload-artifact@v4
+        if: env.FOUND == 'true'
         with:
           name: Tasyir-Android
-          path: app/build/outputs/apk/**/*.apk
+          path: ${{ env.PROJ }}/app/build/outputs/apk/**/*.apk
           if-no-files-found: error
       - name: Publish release (tags only)
-        if: startsWith(github.ref, 'refs/tags/v') && steps.ks.outputs.ready == 'true'
+        if: env.FOUND == 'true' && startsWith(github.ref, 'refs/tags/v') && steps.ks.outputs.ready == 'true'
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: ${{ env.PROJ }}/app/build/outputs/apk/release/*.apk
