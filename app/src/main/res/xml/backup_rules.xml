@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 وأقدم: تبقى بيانات المتجر ضمن النسخ الاحتياطي، ويُستثنى كل ما هو سرّي أو مرتبط بالجهاز -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="tasyir_pin.xml" />
+    <exclude domain="sharedpref" path="lic.xml" />
+    <exclude domain="sharedpref" path="tasyir_scan.xml" />
+    <exclude domain="cache" />
+</full-backup-content>

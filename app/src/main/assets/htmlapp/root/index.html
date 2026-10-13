@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://cdn.jsdelivr.net; worker-src 'self' blob: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https: data: blob:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+<script src="../js/icons.js"></script>
+<meta name="theme-color" content="#0f766e"><title>tasyir bmd</title>
+<link rel="stylesheet" href="../css/app.css"></head><body>
+<header><b id="ttl"></b></header>
+<main id="m"></main><nav id="nv"></nav><div id="rc"></div><div id="ov"></div><div id="sv"></div>
+<script>
+const T={ar:{app:"tasyir bmd",dash:"الرئيسية",pos:"البيع",prod:"المنتجات",cust:"الزبائن",exp:"المصاريف",set:"الإعدادات",
+today:"مبيعات اليوم",profit:"الربح التقديري",debts:"ديون الزبائن",low:"مخزون منخفض",expT:"مصاريف اليوم",cnt:"عدد العمليات",
+name:"الاسم",bc:"الباركود",cost:"سعر الشراء",price:"سعر البيع",stock:"المخزون",min:"الحد الأدنى",unit:"الوحدة",
+add:"إضافة",edit:"تعديل",del:"حذف",save:"حفظ",cancel:"إلغاء",search:"بحث بالاسم أو الباركود",scan:"مسح",
+cart:"السلة",empty:"لا توجد عناصر",qty:"الكمية",disc:"خصم",paid:"المدفوع",total:"المجموع",done:"إتمام البيع",
+nostock:"المخزون غير كافٍ: ",needc:"اختر زبونًا للبيع بالدين",phone:"الهاتف",bal:"الرصيد",pay:"تسجيل دفعة",amt:"المبلغ",
+note:"ملاحظة",noscan:"الماسح غير مدعوم، استخدم الإدخال اليدوي أو ماسحًا خارجيًا",nof:"غير موجود",
+walk:"زبون عابر",bk:"نسخة احتياطية",rs:"استعادة",shop:"اسم المتجر",cat:"الفئة",ok:"تم",prt:"طباعة",
+cf:"هل أنت متأكد؟",inv:"فاتورة",debt:"دين",chg:"الباقي",bad:"ملف غير صالح",u:"قطعة",kg:"كغ",l:"لتر",m:"متر",sold:"مباع",none:"لا شيء",
+warn:"تنبيه: السعر أقل من سعر الشراء",gen:"توليد",hist:"آخر المبيعات",lbl:"طباعة الملصق",dbt:"الديون",nocam:"تعذر تشغيل الكاميرا: اسمح بالوصول للكاميرا وافتح التطبيق عبر HTTPS",nolib:"تعذر تحميل مكتبة المسح (يلزم إنترنت لأول مرة)",todebt:"بيع بالدين",img:"صورة المنتج (اختياري)",scanning:"وجّه الكاميرا نحو الباركود أو QR",added:"أُضيف: ",newc:"زبون جديد",addd:"إضافة دين",rmi:"حذف الصورة",ocrb:"اكتب الاسم بالكاميرا",cap:"التقاط",use:"استخدام",ocrh:"وجّه الكاميرا نحو اسم المنتج ثم اضغط التقاط",ocrf:"تعذر تحميل مكتبة القراءة (يلزم إنترنت لأول مرة)",retry:"إعادة"},
+fr:{app:"tasyir bmd",dash:"Accueil",pos:"Vente",prod:"Produits",cust:"Clients",exp:"Dépenses",set:"Réglages",
+today:"Ventes du jour",profit:"Bénéfice estimé",debts:"Dettes clients",low:"Stock faible",expT:"Dépenses du jour",cnt:"Opérations",
+name:"Nom",bc:"Code-barres",cost:"Prix d'achat",price:"Prix de vente",stock:"Stock",min:"Seuil min.",unit:"Unité",
+add:"Ajouter",edit:"Modifier",del:"Supprimer",save:"Enregistrer",cancel:"Annuler",search:"Nom ou code-barres",scan:"Scanner",
+cart:"Panier",empty:"Aucun article",qty:"Quantité",disc:"Remise",paid:"Payé",total:"Total",done:"Valider la vente",
+nostock:"Stock insuffisant : ",needc:"Choisir un client pour la vente à crédit",phone:"Téléphone",bal:"Solde",pay:"Enregistrer un paiement",amt:"Montant",
+note:"Note",noscan:"Scanner non supporté, saisie manuelle ou lecteur externe",nof:"Introuvable",
+walk:"Client de passage",bk:"Sauvegarde",rs:"Restaurer",shop:"Nom de la boutique",cat:"Catégorie",ok:"OK",prt:"Imprimer",
+cf:"Êtes-vous sûr ?",inv:"Facture",debt:"Crédit",chg:"Rendu",bad:"Fichier invalide",u:"pièce",kg:"kg",l:"litre",m:"mètre",sold:"vendu",none:"Aucun",
+warn:"Attention : prix inférieur au coût",gen:"Générer",hist:"Dernières ventes",lbl:"Imprimer l'étiquette",dbt:"Dettes",nocam:"Caméra indisponible : autorisez-la et ouvrez en HTTPS",nolib:"Bibliothèque de scan non chargée (internet requis la 1re fois)",todebt:"Vendre à crédit",img:"Image du produit (facultatif)",scanning:"Visez le code-barres ou QR",added:"Ajouté : ",newc:"Nouveau client",addd:"Ajouter une dette",rmi:"Supprimer l'image",ocrb:"Nom par caméra",cap:"Capturer",use:"Utiliser",ocrh:"Visez le nom du produit puis capturez",ocrf:"Bibliothèque de lecture non chargée (internet requis la 1re fois)",retry:"Refaire"}};
+Object.assign(T.ar,{fam:"العائلة",all:"الكل",more:"عرض المزيد",sval:"قيمة المخزون",imp:"استيراد من Excel",imode:"عند وجود المنتج مسبقًا",iskip:"تجاهله (بدون تغيير)",iadd:"إضافة الكمية إلى مخزونه",irep:"استبدال الكمية والمعلومات",inew:"جديد",iupd:"موجود",ierr:"أخطاء",iwarn:"تنبيهات",iskp:"متجاهَل",igo:"استيراد",idone:"تم الاستيراد",iundo:"تراجع عن الاستيراد",iname:"الاسم فارغ — تم تجاهل السطر",iqty:"كمية غير صالحة",imerge:"دمج مكرر في السطر",ibad:"ملف غير صالح (ملفات .xls القديمة تتطلب إنترنت)"});
+Object.assign(T.fr,{fam:"Famille",all:"Tous",more:"Voir plus",sval:"Valeur du stock",imp:"Importer Excel",imode:"Si le produit existe déjà",iskip:"Ignorer (sans changement)",iadd:"Ajouter la quantité au stock",irep:"Remplacer quantité et infos",inew:"Nouveau",iupd:"Existant",ierr:"Erreurs",iwarn:"Alertes",iskp:"Ignoré",igo:"Importer",idone:"Import terminé",iundo:"Annuler l'import",iname:"Nom vide — ligne ignorée",iqty:"Quantité invalide",imerge:"Doublon fusionné, ligne",ibad:"Fichier invalide (l'ancien .xls exige internet)"});
+Object.assign(T.ar,{delc:"حذف الزبون",delcb:"رصيده الحالي:",delcl:"سيُحذف أيضًا سجل ديونه ودفعاته (#).",delcb2:"الزبون عليه دين غير مسدد وسيضيع سجل الدين نهائيًا. هل تريد المتابعة فعلًا؟",delok:"تم حذف الزبون",nocamN:"تعذر فتح الكاميرا. تأكد من السماح بالكاميرا من إعدادات التطبيق."});
+Object.assign(T.fr,{delc:"Supprimer le client",delcb:"Solde actuel :",delcl:"L'historique de ses dettes et paiements (#) sera aussi supprimé.",delcb2:"Ce client a une dette non réglée, l'historique sera perdu définitivement. Continuer ?",delok:"Client supprimé",nocamN:"Impossible d'ouvrir la caméra. Autorisez la caméra dans les réglages de l'application."});
+const K='shopdb_v1';
+let db;try{db=JSON.parse(localStorage.getItem(K))}catch(e){}
+db=db||{lang:(navigator.language||'').startsWith('fr')?'fr':'ar',shop:'',products:[],customers:[],sales:[],ledger:[],expenses:[],seq:0};
+let _big=0;const saveNow=()=>{clearTimeout(window._sv);window._sd=0;try{const j=JSON.stringify(db);localStorage.setItem(K,j);try{window.onSaved&&window.onSaved()}catch(_){}if(j.length>4e6&&!_big){_big=1;setTimeout(()=>toast('[warn] 4MB+ / Storage almost full'),300)}}catch(e){alert('Storage full / الذاكرة ممتلئة')}};
+const save=()=>{window._sd=1;clearTimeout(window._sv);window._sv=setTimeout(saveNow,300)};
+addEventListener('pagehide',()=>{if(window._sd)saveNow()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&window._sd)saveNow()});
+const t=k=>T[db.lang][k]||k,uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const M=c=>(c/100).toLocaleString(LC(),{minimumFractionDigits:2,maximumFractionDigits:2})+' '+((db.settings&&db.settings.currency)||'DA');
+const P=v=>Math.round(parseFloat(String(v).replace(',','.'))*100)||0;
+const N=v=>parseFloat(String(v).replace(',','.'))||0;
+const day=(d=new Date())=>d.toLocaleDateString('sv');
+let tab='dash',cart=[],cu='',busy=false,res=[];
+const TABS=[['dash',ic('bars')],['pos',ic('cart')],['prod',ic('package')],['cust',ic('users')],['dbt',ic('book')],['exp',ic('wallet')],['set',ic('sliders')]];
+const bal=id=>db.ledger.filter(l=>l.c===id).reduce((s,l)=>s+(l.t==='debt'?l.a:-l.a),0);
+function R(){document.documentElement.lang=db.lang;document.documentElement.dir=db.lang==='ar'?'rtl':'ltr';
+ lg.value=db.lang;ttl.textContent=db.shop||t('app');document.title=t('app');
+ nv.innerHTML=TABS.map(([k,i])=>`<button class="${tab===k?'on':''}" onclick="tab='${k}';R()">${i}<br>${t(k)}</button>`).join('');
+ m.innerHTML=({dash:vDash,pos:vPos,prod:vProd,cust:vCust,dbt:vDbt,exp:vExp,set:vSet})[tab]();}
+function vDash(){const d=day(),s=db.sales.filter(x=>x.day===d),tot=s.reduce((a,x)=>a+x.total,0),
+ pr=s.reduce((a,x)=>a+x.lines.reduce((b,l)=>b+Math.round((l.price-l.cost)*l.qty),0)-x.disc,0),
+ dt=db.customers.reduce((a,c)=>a+Math.max(0,bal(c.id)),0),ex=db.expenses.filter(x=>x.day===d).reduce((a,x)=>a+x.a,0),
+ lw=db.products.filter(p=>!p.arch&&p.stock<=p.min),ap=db.products.filter(p=>!p.arch),sv_=ap.reduce((a,p)=>a+Math.round(p.cost*p.stock),0);
+ return `<div class="g"><div class="card"><div class="k">${t('today')}</div><div class="v">${M(tot)}</div></div>
+ <div class="card"><div class="k">${t('profit')}</div><div class="v">${M(pr)}</div></div>
+ <div class="card"><div class="k">${t('debts')}</div><div class="v red">${M(dt)}</div></div>
+ <div class="card"><div class="k">${t('expT')}</div><div class="v">${M(ex)}</div></div>
+ <div class="card"><div class="k">${t('cnt')}</div><div class="v">${s.length}</div></div>
+ <div class="card"><div class="k">${t('sval')}</div><div class="v">${M(sv_)}</div><div class="k">${ap.length} ${t('prod')}</div></div></div>
+ <div class="card"><b>${ic('alert')} ${t('low')} (${lw.length})</b>${lw.map(p=>`<div class="row"><span>${esc(p.name)}</span><span class="red">${p.stock}</span></div>`).join('')||`<div class="k">${t('none')}</div>`}</div>
+ <div class="card"><b>${ic('receipt')} ${t('hist')}</b>${db.sales.slice(-8).reverse().map(s=>`<div class="row"><span>${s.no}<div class="k">${new Date(s.d).toLocaleString()}</div></span><b>${M(s.total)}</b><button class="b sm" onclick="receipt(db.sales.find(x=>x.id==='${s.id}'))">${ic('printer')}</button></div>`).join('')||`<div class="k">${t('none')}</div>`}</div>`;}
+function vPos(){const sub=cart.reduce((a,l)=>a+Math.round(l.price*l.qty),0);
+ return `<div class="card"><div class="bar"><input id="q" placeholder="${t('search')}" oninput="find(this.value)" onkeydown="if(event.key==='Enter')enter(this.value)" autocomplete="off">
+ <button class="b" onclick="scan(posScan,1)">${ic('camera')}</button></div><div id="rs"></div></div>
+ <div class="card"><b>${t('cart')}</b>${cart.map((l,i)=>`<div class="row"><div style="flex:1">${esc(l.name)}<div class="k">${M(l.price)}</div></div>
+ <input type="number" step="any" style="width:80px" value="${l.qty}" onchange="cart[${i}].qty=Math.max(0,N(this.value));R()">
+ <b>${M(Math.round(l.price*l.qty))}</b><button class="b r sm" onclick="cart.splice(${i},1);R()">${ic('x')}</button></div>`).join('')||`<div class="k">${t('empty')}</div>`}</div>
+ <div class="card"><select id="cu" onchange="cu=this.value"><option value="">${t('walk')}</option>${db.customers.map(c=>`<option value="${c.id}" ${cu===c.id?'selected':''}>${esc(c.name)}${c.phone?' · '+esc(c.phone):''}</option>`).join('')}</select><button class="b sm s" onclick="cForm(null,1)">${ic('plus')} ${t('newc')}</button>
+ <label class="k">${t('disc')}</label><input id="dc" type="number" step="any" value="0">
+ <label class="k">${t('paid')} (${t('total')}: ${M(sub)})</label><input id="pd" type="number" step="any" placeholder="${(sub/100).toFixed(2)}">
+ <button class="b" style="width:100%;margin-top:8px" ${busy||!cart.length?'disabled':''} onclick="sell()">${ic('check')} ${t('done')}</button>
+ <button class="b r" style="width:100%;margin-top:6px" ${busy||!cart.length?'disabled':''} onclick="sell(1)">${ic('book')} ${t('todebt')}</button></div>`;}
+const nz=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u064B-\u065F\u0300-\u036f]/g,'').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[أإآٱ]/g,'ا').replace(/[٠-٩]/g,d=>d.charCodeAt(0)-1632);
+function mt(p,q){const h=nz(p.name+' '+(p.bc||'')),s=nz(q).trim();if(!s)return 2;
+ if(s.split(/\s+/).every(w=>h.includes(w)))return 2;
+ const c=s.replace(/\s+/g,'');let i=0;for(const ch of h){if(ch===c[i])i++;if(i===c.length)return 1}return 0}
+const EL=['0001101','0011001','0010011','0111101','0100011','0110001','0101111','0111011','0110111','0001011'],
+EG=['0100111','0110011','0011011','0100001','0011101','0111001','0000101','0010001','0001001','0010111'],
+ER=['1110010','1100110','1101100','1000010','1011100','1001110','1010000','1000100','1001000','1110100'],
+EP=['LLLLLL','LLGLGG','LLGGLG','LLGGGL','LGLLGG','LGGLLG','LGGGLL','LGLGLG','LGLGGL','LGGLGL'];
+function ean13(c){if(!/^\d{13}$/.test(c))return '';const s=[...c].map(Number);let k=0;for(let i=0;i<12;i++)k+=s[i]*(i%2?3:1);if((10-k%10)%10!==s[12])return '';
+ let b='101';for(let i=1;i<7;i++)b+=(EP[s[0]][i-1]==='L'?EL:EG)[s[i]];b+='01010';for(let i=7;i<13;i++)b+=ER[s[i]];b+='101';
+ let x=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${b.length+20} 60" width="200" style="background:#fff"><g fill="#000">`;
+ [...b].forEach((v,i)=>{if(v==='1')x+=`<rect x="${i+10}" y="2" width="1" height="46"/>`});
+ return x+`</g><text x="${(b.length+20)/2}" y="58" font-size="9" text-anchor="middle" font-family="monospace">${c}</text></svg>`}
+function gen(){let c;do{let b='2';for(let i=0;i<11;i++)b+=Math.floor(Math.random()*10);let k=0;[...b].forEach((d,i)=>k+=d*(i%2?3:1));c=b+(10-k%10)%10}while(db.products.some(p=>p.bc===c));
+ document.getElementById('f1').value=c;bcPrev()}
+function bcPrev(){document.getElementById('bcv').innerHTML=ean13(document.getElementById('f1').value.trim())}
+function lbl(){const n=document.getElementById('f0').value,c=document.getElementById('f1').value.trim();rc.innerHTML=`<div style="text-align:center">${esc(n)}<br>${ean13(c)||esc(c)}</div>`;window.print()}
+function csvx(){const r=[['name','barcode','family','cost','price','stock']].concat(db.products.filter(p=>!p.arch).map(p=>[p.name,p.bc,p.fam||'',p.cost/100,p.price/100,p.stock]));
+ dlFile('products-'+day()+'.csv',['\ufeff'+r.map(x=>x.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n')],'text/csv')}
+function find(v){v=v.toLowerCase().trim();const box=document.getElementById('rs');if(!box)return;
+ res=v?db.products.filter(p=>!p.arch&&mt(p,v)).sort((a,b)=>mt(b,v)-mt(a,v)).slice(0,8):[];
+ box.innerHTML=res.map(p=>`<div class="row" onclick="addP('${p.id}')">${th(p)}<span style="flex:1">${esc(p.name)}</span><span>${M(p.price)}<span class="qt"> · ${p.stock}</span></span></div>`).join('');}
+function enter(v){v=v.trim();const st=res.filter(x=>mt(x,v)===2),p=findP(v)||(st.length===1?st[0]:null);
+ if(p)addP(p.id);else if(v)alert(t('nof'));}
+function addP(id,q){const p=db.products.find(x=>x.id===id);if(!p)return;const l=cart.find(x=>x.pid===id);
+ if(l)l.qty+=1;else cart.push({pid:id,name:p.name,price:p.price,cost:p.cost,qty:1});R();
+ if(!q){if(p.price<p.cost)alert(t('warn'));const i=document.getElementById('q');if(i)i.focus()}}
+let ZXp;const loadZX=()=>window.ZXing?Promise.resolve():(ZXp=ZXp||new Promise((ok,no)=>{const e=document.createElement('script');e.src='https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';e.onload=ok;e.onerror=()=>{ZXp=null;no()};document.head.appendChild(e)}));
+const valid=c=>{if(!/^\d+$/.test(c)||![8,12,13].includes(c.length))return true;const d=[...c].map(Number),k=d.pop();let x=0;d.reverse().forEach((n,i)=>x+=n*(i%2?1:3));return (10-x%10)%10===k};
+const beep=()=>{try{const a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.frequency.value=1000;o.connect(a.destination);o.start();setTimeout(()=>{o.stop();a.close()},90)}catch(e){}};
+function findP(c){const a=[c,'0'+c,c.replace(/^0+/,'')];return db.products.find(x=>!x.arch&&(a.includes(x.bc)||x.id===c||'P:'+x.id===c))}
+function posScan(c){const p=findP(c);if(!p)return[0,t('nof')+': '+c];addP(p.id,1);return[1,t('added')+p.name+' ×'+cart.find(l=>l.pid===p.id).qty]}
+window.__ns=c=>{let r;try{r=window._nscb?window._nscb(c):null}catch(e){r=[0,String(e&&e.message||e)]}return JSON.stringify(r||[1,''])};
+function toast(m){try{let e=document.getElementById('tst');if(!e){e=document.createElement('div');e.id='tst';e.style.cssText='position:fixed;left:12px;right:12px;bottom:76px;background:#0f172a;color:#fff;padding:10px 14px;border-radius:10px;z-index:99;text-align:center;font-size:14px';document.body.appendChild(e)}
+ e.textContent=m;e.style.display='block';clearTimeout(window._tt);window._tt=setTimeout(()=>e.style.display='none',2600)}catch(_){}}
+if(window.Android&&typeof Android.print==='function')window.print=()=>Android.print();
+let _le=0;const onErr=m=>{console.error(m);if(Date.now()-_le>5000){_le=Date.now();toast('[warn] '+String(m).slice(0,120))}};
+window.addEventListener('error',e=>onErr(e.message||'error'));window.addEventListener('unhandledrejection',e=>onErr((e.reason&&e.reason.message)||e.reason||'error'));
+async function scan(cb,multi){
+ if(window.Android&&typeof Android.scan==='function'){window._nscb=cb;try{Android.scan(!!multi)}catch(e){alert(t('nocamN')+' ('+e+')')}return}
+ const S=x=>{const e=document.getElementById('sst');if(e)e.innerHTML=x};
+ sv.innerHTML=`<div class="md"><div><video id="vd" autoplay playsinline muted></video><div id="sst" class="k" style="margin:8px 0;font-size:14px"></div><button class="b s" style="width:100%" onclick="stopScan()">${multi?t('ok'):t('cancel')}</button></div></div>`;
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return S((ic('x')+' ')+t('nocam'));
+ let st;try{st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false})}catch(e){return S((ic('x')+' ')+t('nocam')+' ('+e.name+')')}
+ const v=document.getElementById('vd');if(!v){st.getTracks().forEach(x=>x.stop());return}
+ v.srcObject=st;window._st=st;const run=window._run=Symbol();
+ try{const tr=st.getVideoTracks()[0],cp=tr.getCapabilities&&tr.getCapabilities();if(cp&&cp.focusMode&&cp.focusMode.includes('continuous'))await tr.applyConstraints({advanced:[{focusMode:'continuous'}]})}catch(e){}
+ let det,rd;const cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+ if('BarcodeDetector' in window){try{det=new BarcodeDetector({formats:['qr_code','ean_13','ean_8','upc_a','upc_e','code_128','code_39']})}catch(e){try{det=new BarcodeDetector()}catch(e2){}}}
+ if(!det){S(ic('clock'));try{await loadZX()}catch(e){return S((ic('x')+' ')+t('nolib'))}
+  const Z=ZXing,h=new Map(),F=Z.BarcodeFormat;h.set(Z.DecodeHintType.TRY_HARDER,true);h.set(Z.DecodeHintType.POSSIBLE_FORMATS,[F.QR_CODE,F.EAN_13,F.EAN_8,F.UPC_A,F.UPC_E,F.CODE_128,F.CODE_39]);rd=new Z.MultiFormatReader();rd.setHints(h)}
+ if(window._run!==run)return;S((ic('camera')+' ')+t('scanning'));
+ let last='',hits=0,miss=0,cool={};
+ const read=async()=>{if(det){const r=await det.detect(v);return r.length?r[0].rawValue:''}
+  const w=Math.min(v.videoWidth,800);cv.width=w;cv.height=Math.round(v.videoHeight*w/v.videoWidth);cx.drawImage(v,0,0,cv.width,cv.height);
+  try{return rd.decodeWithState(new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(new ZXing.HTMLCanvasElementLuminanceSource(cv)))).getText()}catch(e){return ''}};
+ const loop=async()=>{if(window._run!==run)return;let c='';try{if(v.videoWidth)c=String(await read()||'').trim()}catch(e){}
+  if(window._run!==run)return;
+  if(c&&valid(c)){miss=0;hits=c===last?hits+1:1;last=c;
+   if(hits>=2&&!(cool[c]>Date.now())){cool[c]=Date.now()+1800;beep();if(navigator.vibrate)navigator.vibrate(60);
+    const r=cb(c)||[1,''];if(!multi)return stopScan();S((r[0]?(ic('check')+' '):(ic('x')+' '))+esc(r[1]))}}
+  else if(++miss>8){hits=0;last=''}
+  setTimeout(loop,det?70:110)};
+ loop();}
+let TSp;const loadTS=()=>window.Tesseract?Promise.resolve():(TSp=TSp||new Promise((ok,no)=>{const e=document.createElement('script');e.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';e.onload=ok;e.onerror=()=>{TSp=null;no()};document.head.appendChild(e)}));
+async function ocr(cb){const S=x=>{const e=document.getElementById('ost');if(e)e.innerHTML=x};
+ sv.innerHTML=`<div class="md"><div><video id="ovd" autoplay playsinline muted></video><div id="ost" class="k" style="margin:8px 0;font-size:14px"></div><div class="bar"><button class="b" id="ocap" disabled>${ic('camera')} ${t('cap')}</button><button class="b s" onclick="stopScan()">${t('cancel')}</button></div></div></div>`;
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return S((ic('x')+' ')+t('nocam'));
+ let st;try{st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false})}catch(e){return S((ic('x')+' ')+t('nocam')+' ('+e.name+')')}
+ const v=document.getElementById('ovd');if(!v){st.getTracks().forEach(x=>x.stop());return}
+ v.srcObject=st;window._st=st;S((ic('camera')+' ')+t('ocrh'));loadTS().catch(()=>{});
+ const go=document.getElementById('ocap');go.disabled=false;
+ go.onclick=async()=>{const cv=document.createElement('canvas'),w=Math.min(v.videoWidth,1600);if(!w)return;cv.width=w;cv.height=Math.round(v.videoHeight*w/v.videoWidth);
+  const x=cv.getContext('2d');try{x.filter='grayscale(1) contrast(1.3)'}catch(e){}x.drawImage(v,0,0,cv.width,cv.height);
+  st.getTracks().forEach(z=>z.stop());go.disabled=true;S(ic('clock'));
+  let tx='';try{await loadTS();const r=await Tesseract.recognize(cv,'ara+fra',{logger:m=>{if(m.status)S((ic('clock')+' ')+m.status+' '+Math.round((m.progress||0)*100)+'%')}});tx=r.data.text||''}
+  catch(e){return S((ic('x')+' ')+t('ocrf')+'<br><button class="b s sm" onclick="stopScan()">'+t('ok')+'</button>')}
+  const L=tx.split(/\n+/).map(a=>a.replace(/[^\p{L}\p{N}\s\-.,%&\/]/gu,'').replace(/\s+/g,' ').trim()).filter(a=>a.length>1),
+   ar=L.filter(a=>/[\u0600-\u06FF]/.test(a)),la=L.filter(a=>!/[\u0600-\u06FF]/.test(a)),nm=[la.join(' '),ar.join(' ')].filter(Boolean).join(' / ');
+  sv.innerHTML=`<div class="md"><div><label class="k">${t('name')}</label><input id="otx" value="${esc(nm)}"><div class="bar" style="margin-top:8px"><button class="b" id="ous">${ic('check')} ${t('use')}</button><button class="b s" id="ore">${t('retry')}</button><button class="b s" onclick="stopScan()">${t('cancel')}</button></div></div></div>`;
+  document.getElementById('ous').onclick=()=>{const q=document.getElementById('otx').value.trim();stopScan();if(q)cb(q)};
+  document.getElementById('ore').onclick=()=>ocr(cb)}}
+function stopScan(){window._run=0;if(window._st)window._st.getTracks().forEach(x=>x.stop());window._st=0;sv.innerHTML='';}
+function sell(d){if(busy)return;busy=true;let ok=0;try{
+ for(const l of cart){const p=db.products.find(x=>x.id===l.pid);if(!p||l.qty<=0||p.stock<l.qty){alert(t('nostock')+l.name);return}}
+ const sub=cart.reduce((a,l)=>a+Math.round(l.price*l.qty),0),dc=Math.min(sub,Math.max(0,P(dc_.value))),total=sub-dc;
+ let paid=d?0:pd.value===''?total:Math.min(total,Math.max(0,P(pd.value)));const debt=total-paid;
+ if(debt>0&&!cu){alert(t('needc'));return}
+ const s={id:uid(),no:'INV-'+String(++db.seq).padStart(5,'0'),d:new Date().toISOString(),day:day(),
+  lines:cart.map(l=>({pid:l.pid,name:l.name,qty:l.qty,price:l.price,cost:l.cost,total:Math.round(l.price*l.qty)})),
+  sub,disc:dc,total,paid,debt,cust:cu||null};
+ s.lines.forEach(l=>{db.products.find(x=>x.id===l.pid).stock=Math.round((db.products.find(x=>x.id===l.pid).stock-l.qty)*1000)/1000});
+ if(debt>0)db.ledger.push({id:uid(),c:cu,t:'debt',a:debt,d:s.d,ref:s.no});
+ db.sales.push(s);save();cart=[];cu='';ok=1;receipt(s);}finally{busy=false;if(ok)R()}}
+const dc_=new Proxy({},{get:(_,k)=>k==='value'?document.getElementById('dc').value:0});
+function receipt(s){const c=db.customers.find(x=>x.id===s.cust);
+ rc.innerHTML=`<div style="text-align:center"><b>${esc(db.shop||t('app'))}</b><br>${s.no}<br>${new Date(s.d).toLocaleString(LC())}</div><hr>`+
+ s.lines.map(l=>`${esc(l.name)}<br>${l.qty} × ${M(l.price)} = ${M(l.total)}<br>`).join('')+
+ `<hr>${t('disc')}: ${M(s.disc)}<br><b>${t('total')}: ${M(s.total)}</b><br>${t('paid')}: ${M(s.paid)}<br>${s.debt?`${t('debt')}: ${M(s.debt)}<br>`:''}${c?esc(c.name)+' '+esc(c.phone||'')+(bal(c.id)>0?`<br>${t('bal')}: ${M(bal(c.id))}`:''):''}`;
+ ov.innerHTML=`<div class="md"><div><h3>${ic('check')} ${s.no}</h3><div class="v">${M(s.total)}</div><div class="bar" style="margin-top:10px">
+ <button class="b" onclick="window.print()">${ic('printer')} ${t('prt')} / PDF</button><button class="b s" onclick="ov.innerHTML=''">${t('ok')}</button></div></div></div>`;}
+function form(title,f,cb){ov.innerHTML=`<div class="md"><div><h3>${title}</h3>`+f.map((x,i)=>x[2]==='select'?
+ `<label class="k">${x[0]}</label><select id="f${i}">${x[4].map(o=>`<option value="${o[0]}" ${o[0]==x[3]?'selected':''}>${o[1]}</option>`).join('')}</select>`:
+ `<label class="k">${x[0]}</label><input id="f${i}" type="${x[2]}" step="any" value="${esc(x[3]??'')}">`).join('')+
+ `<div class="bar" style="margin-top:10px"><button class="b" id="fok">${t('save')}</button><button class="b s" onclick="ov.innerHTML=''">${t('cancel')}</button></div></div></div>`;
+ document.getElementById('fok').onclick=()=>{const v=f.map((_,i)=>document.getElementById('f'+i).value);if(cb(v)!==false)ov.innerHTML='';R()};}
+const UN=()=>[['u',t('u')],['kg',t('kg')],['l',t('l')],['m',t('m')]];
+const th=p=>p.img?`<img src="${p.img}" style="width:40px;height:40px;object-fit:cover;border-radius:6px">`:'';
+function pimg(f){if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,240/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);window._img=c.toDataURL('image/jpeg',.7);const e=document.getElementById('pim');e.src=window._img;e.style.display='block'};im.src=r.result};r.readAsDataURL(f)}
+let pq='',pf='',plim=100;
+const fams=()=>[...new Set(db.products.filter(p=>!p.arch&&p.fam).map(p=>p.fam))].sort((a,b)=>a.localeCompare(b));
+const pfs=i=>{pf=i<0?'':fams()[i];plim=100;R()};
+function vProd(){return `<div class="bar" style="margin-bottom:10px"><button class="b" style="flex:1" onclick="pForm()">${ic('plus')} ${t('add')}</button><label class="b s" style="flex:1;text-align:center;padding:10px 6px">${ic('download')} ${t('imp')}<input type="file" accept=".xlsx,.xls,.csv" hidden onchange="impFile(this.files[0]);this.value=''"></label></div>
+ <input placeholder="${t('search')}" value="${esc(pq)}" oninput="pq=this.value;plim=100;pl()"><div class="chips"><span class="ch ${pf?'':'on'}" onclick="pfs(-1)">${t('all')}</span>${fams().map((f,i)=>`<span class="ch ${pf===f?'on':''}" onclick="pfs(${i})">${esc(f)}</span>`).join('')}</div><div class="card" id="pl">${plH()}</div>`;}
+function plH(){const L=db.products.filter(p=>!p.arch&&(!pf||p.fam===pf)&&(!pq||mt(p,pq)));if(pq)L.sort((a,b)=>mt(b,pq)-mt(a,pq));
+ return (L.slice(0,plim).map(p=>
+ `<div class="row">${th(p)}<div style="flex:1"><b>${esc(p.name)}</b><div class="k">${esc(p.bc||'')}${p.fam?` · <span class="tag">${esc(p.fam)}</span>`:''} <span class="qt"> · ${t('stock')}: <span class="${p.stock<=p.min?'red':''}">${p.stock}</span> ${t(p.unit||'u')}</span></div></div>
+ <div>${M(p.price)}</div><button class="b sm" onclick="pForm('${p.id}')">${ic('pencil')}</button></div>`).join('')||`<div class="k">${t('empty')}</div>`)+(L.length>plim?`<button class="b s" style="width:100%;margin-top:8px" onclick="plim+=100;pl()">${t('more')} (${L.length-plim})</button>`:'');}
+function pl(){document.getElementById('pl').innerHTML=plH()}
+function pForm(id){window._img=(db.products.find(x=>x.id===id)||{}).img||'';const p=db.products.find(x=>x.id===id)||{name:'',bc:'',fam:'',cost:0,price:0,stock:0,min:0,unit:'u'};
+ form(t(id?'edit':'add'),[[t('name'),0,'text',p.name],[t('bc'),0,'text',p.bc],[t('cost'),0,'number',p.cost/100],[t('price'),0,'number',p.price/100],
+ [t('stock'),0,'number',p.stock],[t('min'),0,'number',p.min],[t('unit'),0,'select',p.unit||'u',UN()],[t('fam'),0,'text',p.fam||'']],v=>{
+ if(!v[0].trim())return false;const bc=v[1].trim();
+ if(bc&&db.products.some(x=>x.bc===bc&&x.id!==id&&!x.arch)){alert(t('bc')+' ');return false}
+ const o={img:window._img||'',name:v[0].trim(),bc,cost:Math.max(0,P(v[2])),price:Math.max(0,P(v[3])),stock:Math.max(0,N(v[4])),min:Math.max(0,N(v[5])),unit:v[6],fam:v[7].trim()};
+ if(id)Object.assign(p,o);else db.products.push({id:uid(),arch:false,...o});save();});
+ document.getElementById('f0').insertAdjacentHTML('afterend',`<button class="b sm s" onclick="ocr(v=>document.getElementById('f0').value=v)">${ic('type')} ${t('ocrb')}</button>`);const f7=document.getElementById('f7');f7.setAttribute('list','fams');f7.insertAdjacentHTML('afterend',`<datalist id="fams">${fams().map(x=>`<option value="${esc(x)}">`).join('')}</datalist>`);document.getElementById('f2').previousElementSibling.before(f7.previousElementSibling,f7,f7.nextSibling);const b1=document.getElementById('f1');b1.oninput=bcPrev;
+ b1.insertAdjacentHTML('afterend',`<div class="bar"><button class="b sm" onclick="gen()">${ic('shuffle')} ${t('gen')}</button><button class="b sm s" onclick="scan(v=>{document.getElementById('f1').value=v;bcPrev()})">${ic('camera')} ${t('scan')}</button><button class="b sm s" onclick="lbl()">${ic('tag')}</button></div><div id="bcv" style="margin:6px 0"></div>`);bcPrev();
+ document.getElementById('fok').parentNode.insertAdjacentHTML('beforebegin',`<label class="k">${t('img')}</label><div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><img id="pim" src="${window._img}" style="width:56px;height:56px;object-fit:cover;border-radius:8px;display:${window._img?'block':'none'}"><input type="file" accept="image/*" onchange="pimg(this.files[0])"><button class="b sm r" onclick="window._img='';document.getElementById('pim').style.display='none'">${ic('x')}</button></div>`);
+ if(id){const b=document.querySelector('.md .bar:last-child');b.insertAdjacentHTML('beforeend',`<button class="b r" onclick="if(confirm(t('cf'))){db.products.find(x=>x.id==='${id}').arch=true;save();ov.innerHTML='';R()}">${t('del')}</button>`)}}
+function vCust(){return `<button class="b" style="width:100%;margin-bottom:10px" onclick="cForm()">${ic('plus')} ${t('add')}</button><div class="card">`+
+ (db.customers.map(c=>{const b=bal(c.id);return `<div class="row"><div style="flex:1"><b>${esc(c.name)}</b><div class="k">${esc(c.phone||'')}</div></div>
+ <b class="${b>0?'red':'grn'}">${M(b)}</b><button class="b sm" onclick="dF('${c.id}')">${ic('cash')}</button><button class="b sm s" onclick="cForm('${c.id}')">${ic('pencil')}</button><button class="b sm r" onclick="delC('${c.id}')">${ic('trash')}</button></div>`}).join('')||`<div class="k">${t('empty')}</div>`)+`</div>`;}
+function cForm(id,sel,od){const c=db.customers.find(x=>x.id===id)||{name:'',phone:''};
+ form(t(id?'edit':'add'),[[t('name'),0,'text',c.name],[t('phone'),0,'tel',c.phone]],v=>{if(!v[0].trim())return false;
+  c.name=v[0].trim();c.phone=v[1].trim();if(!id){c.id=uid();db.customers.push(c);if(sel)cu=c.id}save();if(od)setTimeout(()=>dF(c.id))})}
+function delC(id){const c=db.customers.find(x=>x.id===id);if(!c)return;
+ const b=bal(id),n=db.ledger.filter(l=>l.c===id).length;
+ let m=t('delc')+': '+c.name+'\n';if(b!==0)m+='\n'+t('delcb')+' '+M(b)+'\n';if(n)m+=t('delcl').replace('#',n)+'\n';m+='\n'+t('cf');
+ if(!confirm(m))return;if(b>0&&!confirm(''+t('delcb2')))return;
+ try{localStorage.setItem(K+'_safety',JSON.stringify(db))}catch(e){}
+ db.customers=db.customers.filter(x=>x.id!==id);db.ledger=db.ledger.filter(l=>l.c!==id);
+ if(cu===id)cu='';save();ov.innerHTML='';R();toast(t('delok'))}
+function vDbt(){const L=db.customers.map(c=>({c,b:bal(c.id)})).filter(x=>x.b!==0||db.ledger.some(l=>l.c===x.c.id)).sort((a,b)=>b.b-a.b);
+ return `<div class="card"><div class="k">${t('debts')}</div><div class="v red">${M(L.reduce((a,x)=>a+Math.max(0,x.b),0))}</div></div>
+ <div class="bar" style="margin-bottom:10px"><select id="dsel"><option value="">${t('cust')}</option>${db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}${c.phone?' · '+esc(c.phone):''}</option>`).join('')}</select><button class="b" onclick="if(dsel.value)dF(dsel.value)">${ic('plus')}</button><button class="b s" onclick="cForm(null,0,1)">${t('newc')}</button></div>
+ <div class="card">`+(L.map(x=>`<div class="row" onclick="dF('${x.c.id}')"><div style="flex:1"><b>${esc(x.c.name)}</b><div class="k">${esc(x.c.phone||'')}</div></div><b class="${x.b>0?'red':'grn'}">${M(x.b)}</b></div>`).join('')||`<div class="k">${t('empty')}</div>`)+`</div>`}
+function dF(id){const c=db.customers.find(x=>x.id===id);if(!c)return;const b=bal(id);
+ const rows=db.ledger.filter(l=>l.c===id).slice().reverse().map(l=>`<div class="row"><div style="flex:1"><b class="${l.t==='debt'?'red':'grn'}">${l.t==='debt'?'+':'−'}${M(l.a)}</b><div class="k">${new Date(l.d).toLocaleDateString()} ${esc(l.ref||'')} ${esc(l.n||'')}</div></div><button class="b sm" onclick="lF('${id}','${l.id}')">${ic('pencil')}</button></div>`).join('')||`<div class="k">${t('empty')}</div>`;
+ ov.innerHTML=`<div class="md"><div><h3>${esc(c.name)} <span class="k">${esc(c.phone||'')}</span></h3><div class="v ${b>0?'red':'grn'}">${M(b)}</div>
+ <div class="bar" style="margin:8px 0"><button class="b sm r" onclick="lF('${id}',0,'debt')">${ic('plus')} ${t('addd')}</button><button class="b sm" onclick="lF('${id}',0,'pay')">${ic('cash')} ${t('pay')}</button><button class="b sm s" onclick="cForm('${id}',0,1)">${ic('pencil')}</button><button class="b sm r" onclick="delC('${id}')">${ic('trash')}</button></div>${rows}
+ <button class="b s" style="width:100%;margin-top:8px" onclick="ov.innerHTML='';R()">${t('ok')}</button></div></div>`}
+function lF(cid,lid,ty){const l=db.ledger.find(x=>x.id===lid)||{t:ty,a:0,n:''};
+ form(t(l.t==='debt'?'addd':'pay'),[[t('amt'),0,'number',l.a/100],[t('note'),0,'text',l.n||''],['',0,'select',l.t,[['debt',t('debt')],['pay',t('pay')]]]],v=>{const a=P(v[0]);if(a<=0)return false;
+  if(lid)Object.assign(l,{a,n:v[1].trim(),t:v[2]});else db.ledger.push({id:uid(),c:cid,t:v[2],a,n:v[1].trim(),d:new Date().toISOString(),ref:'MAN'});save();setTimeout(()=>dF(cid))});
+ if(lid)document.getElementById('fok').parentNode.insertAdjacentHTML('beforeend',`<button class="b r" onclick="if(confirm(t('cf'))){db.ledger=db.ledger.filter(x=>x.id!=='${lid}');save();dF('${cid}')}">${t('del')}</button>`)}
+function payF(id){const c=db.customers.find(x=>x.id===id),h=db.ledger.filter(l=>l.c===id).slice(-5).reverse().map(l=>`${new Date(l.d).toLocaleDateString()} ${l.t==='debt'?'+':'−'}${M(l.a)}`).join('<br>');
+ form(c.name+' — '+M(bal(id)),[[t('amt'),0,'number','']],v=>{const a=P(v[0]);if(a<=0)return false;db.ledger.push({id:uid(),c:id,t:'pay',a,d:new Date().toISOString(),ref:'PAY'});save()});
+ document.querySelector('.md h3').insertAdjacentHTML('afterend',`<div class="k">${h}</div>`);}
+function vExp(){return `<button class="b" style="width:100%;margin-bottom:10px" onclick="eForm()">${ic('plus')} ${t('add')}</button><div class="card">`+
+ (db.expenses.slice(-30).reverse().map(e=>`<div class="row"><div style="flex:1">${esc(e.n)}<div class="k">${e.day}</div></div><b>${M(e.a)}</b></div>`).join('')||`<div class="k">${t('empty')}</div>`)+`</div>`;}
+function eForm(){form(t('add'),[[t('note'),0,'text',''],[t('amt'),0,'number','']],v=>{const a=P(v[1]);if(a<=0)return false;db.expenses.push({id:uid(),n:v[0].trim()||t('exp'),a,day:day(),d:new Date().toISOString()});save()})}
+function licCard(){if(!(window.Android&&typeof Android.licenseInfo==='function'))return '';let i;try{i=JSON.parse(Android.licenseInfo())}catch(e){return ''}
+ const fr=db.lang==='fr',d=i.days;let x;
+ if(i.state==='trial')x=fr?`Essai gratuit — ${d} jour(s) restant(s)`:`تجربة مجانية — متبقي ${d} يوم`;
+ else if(i.unlimited)x=fr?'Licence activée (illimitée)':'الترخيص: مفعّل بدون انتهاء';
+ else x=fr?`Licence activée — ${d} jour(s) restant(s)`:`الترخيص: مفعّل — متبقي ${d} يوم`;
+ return `<div class="card"><div style="margin-bottom:8px;font-weight:600">${x}</div><button class="b" onclick="Android.openLicense()">${ic('key')} ${fr?"Saisir le code d'activation":'إدخال كود التفعيل'}</button></div>`}
+function vSet(){return `<div class="card"><label class="k">${t('shop')}</label><input value="${esc(db.shop)}" onchange="db.shop=this.value;save();R()"></div>
+ <div class="card"><div class="bar"><button class="b" onclick="bk()">${ic('download')} ${t('bk')}</button><button class="b s" onclick="csvx()">CSV</button><label class="b s" style="padding:10px 14px;border-radius:8px">${ic('upload')} ${t('rs')}<input type="file" accept=".json" hidden onchange="rs_(this.files[0]);this.value=''"></label></div></div>${licCard()}`;}
+function dlFile(name,parts,type){const b=new Blob(parts,{type});
+ if(window.Android&&typeof Android.saveFile==='function'){const r=new FileReader();r.onload=()=>{try{Android.saveFile(name,type,String(r.result).split(',')[1])}catch(e){alert(e)}};r.readAsDataURL(b);return}
+ const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click()}
+function bk(){dlFile('shop-backup-'+day()+'.json',[JSON.stringify(db)],'application/json')}
+function rs_(f){if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);
+ if(!Array.isArray(d.products)||!Array.isArray(d.sales)||!Array.isArray(d.ledger))throw 0;if(!confirm(t('cf')))return;
+ localStorage.setItem(K+'_safety',JSON.stringify(db));db=Object.assign({lang:db.lang,shop:'',customers:[],expenses:[],seq:0},d);save();R()}catch(e){alert(t('bad'))}};r.readAsText(f);}
+//IMP-START
+const xd=s=>s.replace(/&(#x?[0-9a-f]+|amp|lt|gt|quot|apos);/gi,(m,e)=>e[0]=='#'?String.fromCodePoint(e[1].toLowerCase()=='x'?parseInt(e.slice(2),16):+e.slice(1)):({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'"})[e.toLowerCase()]);
+async function unzip(buf){const u=new Uint8Array(buf),dv=new DataView(buf);let e=u.length-22;while(e>=0&&dv.getUint32(e,true)!==0x06054b50)e--;if(e<0)throw 0;
+ const n=dv.getUint16(e+10,true);let p=dv.getUint32(e+16,true);const o={};
+ for(let i=0;i<n;i++){const m=dv.getUint16(p+10,true),cs=dv.getUint32(p+20,true),nl=dv.getUint16(p+28,true),xl=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true),nm=new TextDecoder().decode(u.subarray(p+46,p+46+nl));
+  p+=46+nl+xl+cl;const s=lo+30+dv.getUint16(lo+26,true)+dv.getUint16(lo+28,true),d=u.subarray(s,s+cs);
+  o[nm]=m===0?d:m===8?new Uint8Array(await new Response(new Blob([d]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer()):null}return o}
+async function readX(buf){const z=await unzip(buf),tx=n=>z[n]?new TextDecoder().decode(z[n]):'',
+ tt=s=>xd([...s.matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map(m=>m[1]).join('')),
+ ss=[...tx('xl/sharedStrings.xml').matchAll(/<si\b[^>]*>([\s\S]*?)<\/si>/g)].map(m=>tt(m[1])),
+ rl={};for(const m of tx('xl/_rels/workbook.xml.rels').matchAll(/<Relationship\b[^>]*>/g)){const a=m[0],i=a.match(/\bId="([^"]*)"/),g=a.match(/\bTarget="([^"]*)"/);if(i&&g)rl[i[1]]=g[1].replace(/^\//,'')}
+ const out=[];for(const m of tx('xl/workbook.xml').matchAll(/<sheet\b[^>]*>/g)){const a=m[0],nm=(a.match(/\bname="([^"]*)"/)||[])[1]||'',id=(a.match(/\br:id="([^"]*)"/)||[])[1];let p=rl[id]||'';if(!p.startsWith('xl/'))p='xl/'+p;
+  const rows=[];for(const rm of tx(p).matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)){const r=[];
+   for(const c of rm[1].matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)){const at=c[1],ref=(at.match(/\br="([A-Z]+)/)||[])[1];if(!ref||c[2]==null)continue;
+    let ci=0;for(const ch of ref)ci=ci*26+ch.charCodeAt(0)-64;ci--;const ty=(at.match(/\bt="([^"]*)"/)||[])[1],v=(c[2].match(/<v>([\s\S]*?)<\/v>/)||[])[1];let s='';
+    if(ty==='s')s=ss[+v]??'';else if(ty==='inlineStr')s=tt(c[2]);else if(v!=null){s=xd(v);if(!ty||ty==='n'){if(/e/i.test(s)){const n=Number(s);if(Number.isFinite(n)&&Math.abs(n)<1e21)s=Number.isInteger(n)?BigInt(n).toString():String(n)}}}
+    r[ci]=s}
+   if(r.length)rows.push(Array.from(r,x=>x??''))}
+  out.push({name:xd(nm),rows})}return out}
+function readCSV(s){const first=s.split(/\r?\n/)[0]||'',d=[';','\t',','].map(x=>[x,first.split(x).length]).sort((a,b)=>b[1]-a[1])[0][0],rows=[];let r=[],c='',q=0;
+ for(let i=0;i<s.length;i++){const ch=s[i];if(q){if(ch==='"'){if(s[i+1]==='"'){c+='"';i++}else q=0}else c+=ch}
+  else if(ch==='"')q=1;else if(ch===d){r.push(c);c=''}else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&s[i+1]==='\n')i++;r.push(c);c='';if(r.some(x=>x.trim()))rows.push(r);r=[]}else c+=ch}
+ r.push(c);if(r.some(x=>x.trim()))rows.push(r);return rows}
+let SJp;const readSJ=async b=>{if(!window.XLSX)await(SJp=SJp||new Promise((ok,no)=>{const e=document.createElement('script');e.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';e.onload=ok;e.onerror=()=>{SJp=null;no()};document.head.appendChild(e)}));
+ const w=XLSX.read(b);return w.SheetNames.map(n=>({name:n,rows:XLSX.utils.sheet_to_json(w.Sheets[n],{header:1,raw:false,defval:''})}))};
+const HN=s=>nz(s).replace(/[^a-z0-9\u0600-\u06FF]/g,''),
+SY={name:['designation','nom','name','libelle','produit','article','product','item','اسم','الاسم','المنتج','التسمية','البيان','السلعة','الاسمالكامل','اسمالمنتج'],
+ bc:['codebarre','codebarres','codeabarres','barcode','ean','gtin','upc','باركود','الباركود','كودبار','الكودبار'],
+ ref:['reference','ref','code','كود','الكود','المرجع','رمز'],
+ qty:['stock','quantite','qte','qty','quantity','الكمية','كمية','المخزون'],
+ fam:['famille','family','categorie','category','cat','groupe','عائلة','العائلة','فاميلي','فئة','الفئة','صنف','نوع'],
+ cost:['prixdachat','prixachat','pa','cost','achat','سعرالشراء','الشراء'],
+ price:['pdetail','detail','prixdevente','prixvente','pv','pvente','price','prix','سعرالبيع','البيع','سعر'],
+ unit:['unite','unit','الوحدة'],min:['seuil','min','stockmin','seuilmin','الحدالادنى']};
+function detect(h){const m={},u=new Set(),f=(k,ks)=>{const i=h.findIndex((x,j)=>!u.has(j)&&ks.includes(HN(x)));if(i>=0){m[k]=i;u.add(i)}};
+ ['name','bc'].forEach(k=>f(k,SY[k]));if(m.bc==null)f('bc',SY.ref);['qty','fam','cost','price','unit','min'].forEach(k=>f(k,SY[k]));
+ ['name','bc','qty','fam','cost','price','unit','min'].forEach(k=>{if(m[k]==null)m[k]=-1});return m}
+function hdrRow(rows){let b=0,bs=0;rows.slice(0,10).forEach((r,i)=>{const s=r.filter(x=>Object.values(SY).some(a=>a.includes(HN(x)))).length;if(s>bs){bs=s;b=i}});return b}
+const UM={kg:'kg',kilo:'kg',كغ:'kg',كلغ:'kg',l:'l',litre:'l',لتر:'l',m:'m',metre:'m',متر:'m'};
+function impBuild(I){const S=I.sheets[I.si],g=(r,k)=>I.map[k]>=0?String(r[I.map[k]]??'').trim():'',fm={},seen={},items=[],errs=[];
+ S.rows.slice(I.h+1).forEach((r,i)=>{const line=I.h+i+2;if(!r.some(c=>String(c??'').trim()))return;
+  const name=g(r,'name').replace(/\s+/g,' '),bc=g(r,'bc'),rq=g(r,'qty'),w=[];
+  if(!name){errs.push([line,t('iname')]);return}
+  let q=rq===''?0:N(rq);if(rq!==''&&!/^-?\d+([.,]\d+)?$/.test(rq))w.push(t('iqty'));if(q<0){q=0;w.push(t('iqty'))}
+  const fa=g(r,'fam');const fam=fa?(fm[nz(fa)]=fm[nz(fa)]||fa):'',k=bc||'n:'+nz(name);
+  if(seen[k]){seen[k].qty=Math.round((seen[k].qty+q)*1000)/1000;seen[k].w.push(t('imerge')+' #'+line);return}
+  const cost=Math.max(0,P(g(r,'cost'))),price=Math.max(0,P(g(r,'price')));
+  if(price&&price<cost)w.push(t('warn'));
+  const un=UM[nz(g(r,'unit')).replace(/[^a-z\u0600-\u06FF]/g,'')]||'u',
+   ex=(bc?findP(bc):db.products.find(p=>!p.arch&&nz(p.name)===nz(name)))||null;
+  items.push(seen[k]={line,name,bc,fam,qty:q,cost,price,unit:un,min:Math.max(0,N(g(r,'min'))),ex,w})});
+ return{items,errs}}
+let IM;
+async function impFile(f){if(!f)return;try{const buf=await f.arrayBuffer(),u=new Uint8Array(buf);let sh;
+ if(u[0]===0x50&&u[1]===0x4B){try{sh=await readX(buf)}catch(e){sh=await readSJ(buf)}}
+ else if(u[0]===0xD0&&u[1]===0xCF)sh=await readSJ(buf);
+ else sh=[{name:f.name,rows:readCSV(new TextDecoder().decode(u))}];
+ sh=sh.filter(s=>s.rows.length>1);if(!sh.length)throw 0;IM={sheets:sh,si:0,mode:'skip'};impSheet(0)}catch(e){alert(t('ibad'))}}
+function impSheet(i){IM.si=i;const r=IM.sheets[i].rows;IM.h=hdrRow(r);IM.map=detect(r[IM.h]||[]);impUI()}
+const IMK=['name','bc','fam','qty','cost','price','unit','min'];
+function impUI(){const I=IM,S=I.sheets[I.si],hd=S.rows[I.h]||[],{items,errs}=impBuild(I),nn=items.filter(x=>!x.ex),ne=items.length-nn.length,wn=items.filter(x=>x.w.length);
+ const L={name:t('name'),bc:t('bc'),fam:t('fam'),qty:t('stock'),cost:t('cost'),price:t('price'),unit:t('unit'),min:t('min')};
+ const op=k=>`<option value="-1">—</option>`+hd.map((h,i)=>`<option value="${i}" ${I.map[k]===i?'selected':''}>${esc(String(h||'#'+(i+1)))}</option>`).join('');
+ ov.innerHTML=`<div class="md"><div style="max-width:640px"><h3>${ic('download')} ${t('imp')}</h3>
+ ${I.sheets.length>1?`<select onchange="impSheet(+this.value)">${I.sheets.map((s,i)=>`<option value="${i}" ${i===I.si?'selected':''}>${esc(s.name)}</option>`).join('')}</select>`:''}
+ <div class="g" style="gap:4px 8px">${IMK.map(k=>`<div><label class="k">${L[k]}${k==='name'?' *':''}</label><select onchange="IM.map.${k}=+this.value;impUI()">${op(k)}</select></div>`).join('')}</div>
+ <label class="k">${t('imode')}</label><select onchange="IM.mode=this.value"><option value="skip" ${I.mode==='skip'?'selected':''}>${t('iskip')}</option><option value="add" ${I.mode==='add'?'selected':''}>${t('iadd')}</option><option value="replace" ${I.mode==='replace'?'selected':''}>${t('irep')}</option></select>
+ <div class="card" style="margin:8px 0"><span class="tag">${t('inew')}: ${nn.length}</span> <span class="tag" style="background:#e0e7ff;color:#3730a3">${t('iupd')}: ${ne}</span> <span class="tag tg2">${t('ierr')}: ${errs.length}</span> <span class="tag" style="background:#fef3c7;color:#92400e">${t('iwarn')}: ${wn.length}</span></div>
+ <div style="max-height:32vh;overflow:auto">${items.slice(0,40).map(x=>`<div class="row" style="font-size:13px"><div style="flex:1"><b>${esc(x.name)}</b><div class="k">${esc(x.bc)} ${x.fam?'· '+esc(x.fam):''} · ${x.qty}${x.ex?' · '+t('iupd'):''}${x.w.length?(' '+ic('alert')+' ')+esc(x.w.join(', ')):''}</div></div></div>`).join('')}${items.length>40?`<div class="k">… +${items.length-40}</div>`:''}${errs.slice(0,10).map(e=>`<div class="row red" style="font-size:13px">#${e[0]} ${esc(e[1])}</div>`).join('')}</div>
+ <div class="bar" style="margin-top:10px"><button class="b" ${items.length?'':'disabled'} onclick="impGo()">${ic('check')} ${t('igo')} (${items.length})</button><button class="b s" onclick="ov.innerHTML=''">${t('cancel')}</button></div></div></div>`}
+function impGo(){const{items}=impBuild(IM),snap=JSON.stringify(db.products);let a=0,u=0,s=0;const r3=x=>Math.round(x*1000)/1000;
+ items.forEach(it=>{const p=it.ex;
+  if(!p){db.products.push({id:uid(),arch:false,img:'',name:it.name,bc:it.bc,fam:it.fam,cost:it.cost,price:it.price,stock:it.qty,min:it.min,unit:it.unit});a++}
+  else if(IM.mode==='skip')s++;
+  else{if(IM.mode==='add'){p.stock=r3(p.stock+it.qty);if(!p.cost&&it.cost)p.cost=it.cost;if(!p.price&&it.price)p.price=it.price}
+   else{p.stock=it.qty;p.name=it.name;if(it.cost)p.cost=it.cost;if(it.price)p.price=it.price;if(it.min)p.min=it.min}
+   if(it.fam&&(IM.mode==='replace'||!p.fam))p.fam=it.fam;u++}});
+ window._undo=snap;save();tab='prod';R();
+ ov.innerHTML=`<div class="md"><div><h3>${ic('check')} ${t('idone')}</h3><div class="card"><div>${t('inew')}: <b>${a}</b></div><div>${t('iupd')}: <b>${u}</b></div><div>${t('iskp')}: <b>${s}</b></div></div>
+ <div class="bar"><button class="b" onclick="ov.innerHTML=''">${t('ok')}</button><button class="b r" onclick="if(confirm(t('cf'))){db.products=JSON.parse(window._undo);save();ov.innerHTML='';R()}">${ic('undo')} ${t('iundo')}</button></div></div></div>`}
+//IMP-END
+</script>
+<script src="../js/ui.js"></script>
+<script src="../js/v2.js"></script>
+<script src="../js/v3.js"></script>
+<script src="../js/v4.js"></script>
+<script src="../js/v5.js"></script>
+<script src="../js/sync-core.js"></script>
+<script src="../js/sync-android.js"></script>
+</body></html>

@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.Tasyir" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/teal_dark</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+    <style name="Theme.Tasyir.Scanner" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>

@@ -1,0 +1,19 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "shops": {
+      "$code": {
+        ".read": false,
+        ".validate": "$code.matches(/^[A-Z2-9]{10}$/)",
+        ".write": "newData.hasChildren(['k','pub']) && newData.child('k').isString() && newData.child('k').val().length >= 16 && newData.child('k').val().length <= 64 && (!data.exists() || data.child('k').val() === newData.child('k').val())",
+        "k": { ".validate": true },
+        "pub": {
+          ".read": true,
+          ".validate": "newData.hasChildren(['v','n','d'])"
+        },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}

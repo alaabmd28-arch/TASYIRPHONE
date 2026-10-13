@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+: نفس القاعدة للنسخ السحابي ونقل الجهاز -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="tasyir_pin.xml" />
+        <exclude domain="sharedpref" path="lic.xml" />
+        <exclude domain="sharedpref" path="tasyir_scan.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="tasyir_pin.xml" />
+        <exclude domain="sharedpref" path="lic.xml" />
+        <exclude domain="sharedpref" path="tasyir_scan.xml" />
+    </device-transfer>
+</data-extraction-rules>
